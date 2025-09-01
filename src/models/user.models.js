@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
 
-export const Usermodel = sequelize.define("UserModel", {
+const Usermodel = sequelize.define("UserModel", {
   username: { type: DataTypes.STRING(20), allowNull: false, unique: true },
   email: { type: DataTypes.STRING(100), allowNull: false },
   password: { type: DataTypes.INTEGER(255), allowNull: false },
@@ -11,3 +11,5 @@ export const Usermodel = sequelize.define("UserModel", {
     allowNull: false,
   },
 });
+
+export default Usermodel;

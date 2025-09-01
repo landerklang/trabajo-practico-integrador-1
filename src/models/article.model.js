@@ -6,3 +6,5 @@ export const ArticleModel = sequelize.define("ArticleModel", {
   content: { type: DataTypes.TEXT, allowNull: false },
   excerpt: { type: DataTypes.STRING(500) },
 });
+
+export default ArticleModel;
