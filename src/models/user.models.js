@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
+import ProfileModel from "./profile.model.js";
+import ArticleModel from "./article.model.js";
 
 const Usermodel = sequelize.define("UserModel", {
   username: { type: DataTypes.STRING(20), allowNull: false, unique: true },
@@ -11,5 +13,13 @@ const Usermodel = sequelize.define("UserModel", {
     allowNull: false,
   },
 });
+
+Usermodel.hasOne(ProfileModel, { foreignKey: "user_id", as: "Profile" });
+
+ProfileModel.belongsTo(Usermodel, { foreignKey: "user_id", as: "User" });
+
+Usermodel.hasMany(ArticleModel, { foreignKey: "user_id", as: "Article" });
+
+ArticleModel.belongsTo(Usermodel, { foreignKey: "user_id", as: "User" });
 
 export default Usermodel;

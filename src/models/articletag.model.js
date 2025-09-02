@@ -1,5 +1,7 @@
 import { sequelize } from "../config/database.js";
 import { DataTypes } from "sequelize";
+import ArticleModel from "./article.model.js";
+import TagModel from "./tag.model.js";
 
 const ArticleTagModel = sequelize.define("ArticleTagModel", {
   id: {
@@ -8,6 +10,18 @@ const ArticleTagModel = sequelize.define("ArticleTagModel", {
     primaryKey: true,
     allowNull: false,
   },
+});
+
+ArticleModel.belongsToMany(TagModel, {
+  through: ArticleTagModel,
+  foreignKey: "article_id",
+  as: "articulo",
+});
+
+TagModel.belongsToMany(ArticleModel, {
+  through: ArticleTagModel,
+  foreignKey: "Tag_id",
+  as: "Tag",
 });
 
 export default ArticleTagModel;
