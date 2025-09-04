@@ -4,6 +4,7 @@ import { starOn } from "./src/config/database.js";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { authRouter } from "./src/routers/auth.routers.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -17,6 +18,7 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use("/api", authRouter);
 
 app.listen(PORT, async () => {
   await starOn();

@@ -5,8 +5,8 @@ dotenv.config();
 
 export const sequelize = new Sequelize(
   process.env.DB_NAME,
-  process.env.DB_PASSWORD,
   process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
@@ -15,7 +15,7 @@ export const sequelize = new Sequelize(
 
 export const starOn = async () => {
   try {
-    await sequelize.sync({ alter: false });
+    await sequelize.sync({ force: false });
     console.log("se realizo una conexion con exito");
   } catch (error) {
     console.error("no se pudo conectar con la base de datos", error);

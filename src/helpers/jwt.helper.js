@@ -5,8 +5,8 @@ export const generadorToken = (user) => {
   const token = jws.sign(
     {
       id: user.id,
-      name: user.person.name,
-      lastname: user.person.lastname,
+      username: user.person.first_name,
+      lastname: user.person.last_name,
     },
     "JWT_SECRET",
     {
