@@ -1,12 +1,12 @@
-import { decode } from "jsonwebtoken";
 import jws from "jsonwebtoken";
 
 export const generadorToken = (user) => {
   const token = jws.sign(
     {
       id: user.id,
-      username: user.person.first_name,
-      lastname: user.person.last_name,
+      username: user.username,
+      password: user.password,
+      role: user.role,
     },
     "JWT_SECRET",
     {
