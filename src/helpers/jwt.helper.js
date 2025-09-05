@@ -1,25 +1,19 @@
-import jws from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
-export const generadorToken = (user) => {
-  const token = jws.sign(
-    {
-      id: user.id,
-      username: user.username,
-      password: user.password,
-      role: user.role,
-    },
-    "JWT_SECRET",
-    {
+export const generadorToken = (payload) => {
+  try {
+    return jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
-    }
-  );
-  return token;
+    });
+  } catch (error) {
+    throw new Error("Error generando el token:" + error.message);
+  }
 };
 
 export const verifyToken = (token) => {
   try {
-    return jws.verify(token, process.env.JWT_SECRET);
+    return jwt.verify(token, process.env.JWT_SECRET);
   } catch (error) {
-    throw new error("error de verificacion de token:" + error.message);
+    throw new Error("error vericando el token:" + error.message);
   }
 };
