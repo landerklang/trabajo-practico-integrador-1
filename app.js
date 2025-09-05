@@ -5,6 +5,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { authRouter } from "./src/routers/auth.routers.js";
+import { userRouters } from "./src/routers/user.routers.js";
+import { TagRouters } from "./src/routers/tag.routers.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -19,6 +21,8 @@ app.use(
 );
 app.use(cookieParser());
 app.use("/api", authRouter);
+app.use("/api", userRouters);
+app.use("/api", TagRouters);
 
 app.listen(PORT, async () => {
   await starOn();

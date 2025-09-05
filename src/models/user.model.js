@@ -10,8 +10,8 @@ const Usermodel = sequelize.define(
     email: { type: DataTypes.STRING(100), allowNull: false },
     password: { type: DataTypes.STRING(255), allowNull: false },
     role: {
-      type: DataTypes.ENUM("user", "admin", "guest"),
-      defaultValue: "guest",
+      type: DataTypes.ENUM("user", "admin"),
+      defaultValue: "user",
       allowNull: false,
     },
   },

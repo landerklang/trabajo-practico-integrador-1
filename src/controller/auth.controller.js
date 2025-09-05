@@ -1,7 +1,7 @@
 import Usermodel from "../models/user.model.js";
 import ProfileModel from "../models/profile.model.js";
 import { comparePassword, hashPassword } from "../helpers/bcrypt.helpers.js";
-import { generadorToken, verifyToken } from "../helpers/jwt.helper.js";
+import { generadorToken } from "../helpers/jwt.helper.js";
 
 export const register = async (req, res) => {
   const {
@@ -43,10 +43,10 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { username, password, role } = req.body;
+  const { username, password } = req.body;
   try {
     const user = await Usermodel.findOne({
-      where: { username: username, role },
+      where: { username: username },
       include: {
         model: ProfileModel,
         attributes: ["first_name", "last_name", "biography", "birth_date"],
