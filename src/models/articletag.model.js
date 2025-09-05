@@ -15,13 +15,13 @@ const ArticleTagModel = sequelize.define("ArticleTagModel", {
 ArticleModel.belongsToMany(TagModel, {
   through: ArticleTagModel,
   foreignKey: "article_id",
-  as: "articulo",
+  as: "tags",
 });
 
 TagModel.belongsToMany(ArticleModel, {
   through: ArticleTagModel,
   foreignKey: "Tag_id",
-  as: "Tag",
+  as: "article",
 });
 
 export default ArticleTagModel;
