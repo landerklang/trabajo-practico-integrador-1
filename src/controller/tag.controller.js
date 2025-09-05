@@ -1,6 +1,4 @@
-import { where } from "sequelize";
 import ArticleModel from "../models/article.model.js";
-import ArticleTagModel from "../models/articletag.model.js";
 import TagModel from "../models/tag.model.js";
 
 export const createdTag = async (req, res) => {
