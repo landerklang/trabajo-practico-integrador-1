@@ -8,6 +8,7 @@ import { authRouter } from "./src/routers/auth.routers.js";
 import { userRouters } from "./src/routers/user.routers.js";
 import { TagRouters } from "./src/routers/tag.routers.js";
 import { articleRouters } from "./src/routers/articles.routers.js";
+import { articleTagRouter } from "./src/routers/articleTag.router.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -25,6 +26,7 @@ app.use("/api", authRouter);
 app.use("/api", userRouters);
 app.use("/api", TagRouters);
 app.use("/api", articleRouters);
+app.use("/api", articleTagRouter);
 
 app.listen(PORT, async () => {
   await starOn();
