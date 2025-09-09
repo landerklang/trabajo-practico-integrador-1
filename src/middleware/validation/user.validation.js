@@ -1,7 +1,26 @@
 import { body, param } from "express-validator";
 import Usermodel from "../../models/user.model.js";
 
-export const registreUserValid = [
+export const getUserByFkValid = [
+  param("id")
+    .notEmpty()
+    .withMessage("debe de ser obligatorio en ID")
+    .isInt()
+    .withMessage("el ID debe ser enteros"),
+];
+
+export const updateUserValid = [
+  param("id")
+    .isInt()
+    .withMessage("el id debe de ser entero")
+    .notEmpty()
+    .withMessage("el id debe de ser obligatorio")
+    .custom(async (value) => {
+      const userBD = await Usermodel.findByPk(value);
+      if (!userBD) {
+        throw new Error("el usuario no existe");
+      }
+    }),
   body("username")
     .isLength({ min: 3, max: 20 })
     .withMessage("solo se permiten entre 3 a 20 caractere")
@@ -41,50 +60,12 @@ export const registreUserValid = [
       throw new Error("solamente puede contener los role admin o user");
     }
   }),
-  body("firt_name")
-    .isLength({ min: 2, max: 50 })
-    .withMessage("solamenten se puede ingresar nombres de 2 a 50 caracteres")
-    .isAlpha("es-ES", { ignore: " " })
-    .withMessage("solamente se permite letras"),
-  body("last_name")
-    .isLength({ min: 2, max: 50 })
-    .withMessage(
-      "solamente se puede ingresar apellido que tengas 2 a 50 caractere"
-    )
-    .isAlpha("es-ES", { ignore: " " })
-    .withMessage("solamente se permite letras"),
-  body("biography")
-    .isLength({ max: 500 })
-    .withMessage(
-      "solamente se permite un maximo 500 caracteres mas que eso no "
-    ),
-  body("avatar_url").isURL().withMessage("solamente se admite url"),
 ];
 
-export const loginValid = [
-  body("username")
+export const deletedUserValid = [
+  param("id")
     .notEmpty()
-    .withMessage("no se permiten campos vacios")
-    .isLength({ min: 3, max: 20 })
-    .withMessage("solo se permiten entre 3 a 20 caractere")
-    .isAlphanumeric()
-    .withMessage("debe de ser de tipo alfanumerico"),
-  body("password").notEmpty().withMessage("no se permiten campos vacios"),
-];
-
-export const getProfileValid = [];
-
-export const updateProfilevalid = [
-  body("firt_name")
-    .isLength({ min: 2, max: 50 })
-    .withMessage("solamenten se puede ingresar nombres de 2 a 50 caracteres")
-    .isAlpha("es-ES", { ignore: " " })
-    .withMessage("solamente se permite letras"),
-  body("last_name")
-    .isLength({ min: 2, max: 50 })
-    .withMessage(
-      "solamente se puede ingresar apellido que tengas 2 a 50 caracteres"
-    )
-    .isAlpha("es-ES", { ignore: " " })
-    .withMessage("solamente se permite letras"),
+    .withMessage("el ID debe de ser obligatorio")
+    .isInt()
+    .withMessage("el ID debe de ser entero"),
 ];

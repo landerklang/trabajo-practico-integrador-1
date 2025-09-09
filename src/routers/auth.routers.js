@@ -12,7 +12,7 @@ import {
   loginValid,
   registreUserValid,
   updateProfilevalid,
-} from "../middleware/validation/user.validation.js";
+} from "../middleware/validation/auth.validation.js";
 
 export const authRouter = express.Router();
 
