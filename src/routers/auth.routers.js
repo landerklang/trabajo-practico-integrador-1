@@ -30,4 +30,4 @@ authRouter.put(
   updateProfile
 );
 
-authRouter.post("/auth/logout", validator, authMiddleware, logout);
+authRouter.post("/auth/logout", authMiddleware, validator, logout);

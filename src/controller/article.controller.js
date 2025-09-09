@@ -84,3 +84,20 @@ export const updateArticle = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const deletedArticle = async (req, res) => {
+  try {
+    const deleted = await ArticleModel.destroy({
+      where: { id: req.params.id },
+    });
+    if (deleted) {
+      res.status(200).json({ message: "se elimino correctamente" });
+    } else {
+      return res
+        .status(404)
+        .json({ message: "no se encontro el articulo asociado a una tag" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
