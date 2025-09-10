@@ -3,11 +3,27 @@ import {
   deletedTagArticle,
 } from "../controller/articletag.controller.js";
 import { authMiddleware } from "../middleware/auth.js";
-import { ownerMiddleware } from "../middleware/authOwner.js";
+import { validator } from "../middleware/validation.js";
 import express from "express";
+import {
+  addTagValid,
+  deletedTagArticleValid,
+} from "../middleware/validation/articletag.validation.js";
 
 export const articleTagRouter = express.Router();
 
-articleTagRouter.post("/article-tags", authMiddleware, addTag);
+articleTagRouter.post(
+  "/article-tags",
+  authMiddleware,
+  addTagValid,
+  validator,
+  addTag
+);
 
-articleTagRouter.delete("/article-tags/:id", authMiddleware, deletedTagArticle);
+articleTagRouter.delete(
+  "/article-tags/:id",
+  authMiddleware,
+  deletedTagArticleValid,
+  validator,
+  deletedTagArticle
+);
