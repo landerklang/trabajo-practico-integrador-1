@@ -9,12 +9,14 @@ import {
   addTagValid,
   deletedTagArticleValid,
 } from "../middleware/validation/articletag.validation.js";
+import { ownerMiddleware } from "../middleware/authOwner.js";
 
 export const articleTagRouter = express.Router();
 
 articleTagRouter.post(
   "/article-tags",
   authMiddleware,
+  ownerMiddleware,
   addTagValid,
   validator,
   addTag
@@ -23,6 +25,7 @@ articleTagRouter.post(
 articleTagRouter.delete(
   "/article-tags/:id",
   authMiddleware,
+  ownerMiddleware,
   deletedTagArticleValid,
   validator,
   deletedTagArticle
