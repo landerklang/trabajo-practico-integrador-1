@@ -15,7 +15,8 @@ export const createdArticleValid = [
     .withMessage("no se permite campos vacios en el contenido"),
   body("excerpt")
     .isLength({ max: 500 })
-    .withMessage("solamente se permiten como maximo 500 caracteres"),
+    .withMessage("solamente se permiten como maximo 500 caracteres")
+    .optional(),
   body("status")
     .default("published")
     .isIn(["published", "archived"])
