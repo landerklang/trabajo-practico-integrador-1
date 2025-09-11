@@ -3,7 +3,14 @@ import Usermodel from "../models/user.model.js";
 
 export const createdArticle = async (req, res) => {
   try {
-    const create = await ArticleModel.create(req.body);
+    const { title, content, excerpt, status } = req.body;
+    const create = await ArticleModel.create({
+      title: title,
+      content: content,
+      excerpt: excerpt,
+      status: status,
+      user_id: req.user.id,
+    });
     res.status(201).json(create);
   } catch (error) {
     res.status(500).json({ error: error.message });

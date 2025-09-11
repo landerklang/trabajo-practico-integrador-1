@@ -20,19 +20,7 @@ export const createdArticleValid = [
     .default("published")
     .isIn(["published", "archived"])
     .withMessage("solamente se permiten publishe o archived"),
-  body("user_id")
-    .notEmpty()
-    .withMessage("no se permiten campos vacios")
-    .custom(async (value, { req }) => {
-      const userId = req.user.id;
-      const user = await Usermodel.findByPk(value);
-      if (!user) {
-        throw new Error("El usuario no existe");
-      }
-      if (parseInt(value) !== userId) {
-        throw new Error("Debes ser el autor para crear el artículo");
-      }
-    }),
+  body("user_id").optional(),
 ];
 
 export const getAllArticleValid = [];

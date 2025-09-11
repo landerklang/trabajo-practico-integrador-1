@@ -41,7 +41,7 @@ export const registreUserValid = [
       throw new Error("solamente puede contener los role admin o user");
     }
   }),
-  body("firt_name")
+  body("first_name")
     .isLength({ min: 2, max: 50 })
     .withMessage("solamenten se puede ingresar nombres de 2 a 50 caracteres")
     .isAlpha("es-ES", { ignore: " " })
@@ -58,7 +58,7 @@ export const registreUserValid = [
     .withMessage(
       "solamente se permite un maximo 500 caracteres mas que eso no "
     ),
-  body("avatar_url").isURL().withMessage("solamente se admite url"),
+  body("avatar_url").isURL().withMessage("solamente se admite url").optional(),
 ];
 
 export const loginValid = [

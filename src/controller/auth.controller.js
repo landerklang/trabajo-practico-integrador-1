@@ -56,14 +56,14 @@ export const login = async (req, res) => {
 
     if (!user) {
       return res
-        .status(404)
+        .status(400)
         .json({ message: "el usuario o la contraseña es incorrecta" });
     }
 
     const isMath = await comparePassword(password, user.password);
     if (!isMath) {
       return res
-        .status(404)
+        .status(400)
         .json({ message: "el usuario o la contraseña es incorrecta" });
     }
 
